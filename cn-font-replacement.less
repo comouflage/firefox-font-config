@@ -1,0 +1,108 @@
+#replacement {
+    @cn-serif: "Noto Sans CJK SC";
+    @cn-sans-serif: "Noto Sans CJK SC";
+    @cn-monospace: "Noto Sans CJK SC";
+    @cn-normal: "Noto Sans CJK SC";
+
+    @cn-unicode-range: U+4E00-9FFF;
+
+    .font-src(@local-font) {
+      src: local(@local-font);
+    }
+
+    .font-family(@font-family) {
+      font-family: @font-family;
+    }
+
+    .unicode-range(@range) {
+      unicode-range: @range;
+    }
+
+    .replace-cn-serif() {
+      .font-family("serif");
+      .font-src(@cn-serif);
+      .unicode-range(@cn-unicode-range);
+    }
+
+    .replace-cn-sans-serif() {
+      .font-family("sans-serif");
+      .font-src(@cn-sans-serif);
+      .unicode-range(@cn-unicode-range);
+    }
+
+    .replace-cn-monospace() {
+      .font-family("monopsace");
+      .font-src(@cn-monospace);
+      .unicode-range(@cn-unicode-range);
+    }
+
+    .replace-cn-font(@font-family) {
+      .font-family(@font-family);
+      .font-src(@cn-normal);
+    }
+
+    .replace-cn-font(@font-family, @font-src) {
+      .font-family(@font-family);
+      .font-src(@font-src);
+    }
+}
+
+@font-face {
+    #replacement > .replace-cn-serif;
+}
+
+@font-face {
+    #replacement > .replace-cn-sans-serif;
+}
+
+@font-face {
+    #replacement > .replace-cn-monospace;
+}
+
+@font-face {
+    #replacement > .replace-cn-font("Hiragino Sans GB W3");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("Hiragino Sans GB");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("Wenquanyi Micro Hei");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("WenQuanYi Micro Hei Mono");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("WenQuanYi Zen Hei");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("WenQuanYi Zen Hei Sharp");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("PingFang SC");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("PingFangSC-Regular");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("微软雅黑");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("Microsoft YaHei");
+}
+
+@font-face {
+    #replacement > .replace-cn-font("宋体");
+}
+
+@font-face {
+    #replacement > .replace-cn-font(SimSun);
+}
