@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "Operator SSm";
+    src: local("Operator SSm Book");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-style: italic;
+    src: local("Operator SSm Book Italic");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-weight: bold;
+    src: local("Operator SSm Bold");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-weight: bold;
+    font-style: italic;
+    src: local("Operator SSm Bold Italic");
+}
+
+* {
+    font-family: "Operator SSm", "FZLanTingHeiPro_GB18030" !important;
+}
+
+body {
+    background-color: #fdf6e3;
+}
+
+.headline-title {
+    color: #657b83;
+}
+
+.headline-container:hover>.headline-header {
+    background-color: #eee8d5;
+}
+
+#feed-view-header {
+    background-color: #eee8d5 !important;
+}
+
+#sidebar {
+    background-color: #eee8d5 !important;
+}
+
+#sidebar * {
+    color: #657b83;
+}

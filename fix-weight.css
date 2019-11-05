@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "Operator SSm";
+    src: local("Operator SSm Book");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-style: italic;
+    src: local("Operator SSm Book Italic");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-weight: bold;
+    src: local("Operator SSm Bold");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-weight: bold;
+    font-style: italic;
+    src: local("Operator SSm Bold Italic");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-weight: 300;
+    src: local("Operator SSm Light");
+}
+
+@font-face {
+    font-family: "Operator SSm";
+    font-weight: 300;
+    font-style: italic;
+    src: local("Operator SSm Light Italic");
+}

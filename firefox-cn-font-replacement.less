@@ -1,0 +1,220 @@
+#replacement {
+    @cn-sans-serif-font: "FZLanTingHeiPro_GB18030_Regular";
+    @cn-serif-font: "Noto Serif CJK SC";
+    @cn-monospace-font: "Noto Sans Mono CJK SC";
+    @cn-default-font: "FZLanTingHeiPro_GB18030_Regular";
+
+    @en-sans-serif-font: "Operator SSm Mod Book";
+    @en-serif-font: "DejaVu Serif";
+    @en-monospace-font: "Operator Mono SSm Book";
+    @en-default-font: "Operator SSm Mod Book";
+
+    @cn-unicode-range: U+4E00-9FFF;
+    @en-unicode-range: U+00-024F;
+
+    @cn-fonts-to-replace: "Hiragino Sans GB",
+    "Hiragino Sans GB W3",
+    "Microsoft YaHei",
+    "微软雅黑",
+    "PingFang SC",
+    "Wenquanyi Micro Hei",
+    "WenQuanYi Micro Hei Mono",
+    "WenQuanYi Zen Hei",
+    "WenQuanYi Zen Hei Sharp";
+
+    @en-fonts-to-replace: Arial,
+    "Bitstream Vera Sans",
+    Calibri,
+    Courier,
+    "Courier New",
+    "DejaVu Sans",
+    freesans,
+    Geneva,
+    Grande,
+    Helvetica,
+    "Helvetica Neue",
+    "Liberation Sans",
+    Lucida,
+    "Luxi Sans",
+    "Segoe UI",
+    Tahoma,
+    verdana;
+
+    @en-monospace-font-to-replace: "Andale Mono",
+    "DejaVu Sans Mono",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    SFMono-Regular;
+
+    .font-style(@style) {
+        font-style: @style;
+    }
+
+    .font-weight(@weight) {
+        font-weight: @weight;
+    }
+
+    .font-src(@local-font) {
+        src: local(@local-font);
+    }
+
+    .font-family(@font-family) {
+        font-family: @font-family;
+    }
+
+    .unicode-range(@range) {
+        unicode-range: @range;
+    }
+
+    .replace-font(@font-family, @font-src, @font-weight: normal, @font-style: normal) {
+        @font-face {
+            .font-family(@font-family);
+            .font-src(@font-src);
+        }
+    }
+
+    .replace-font-by-weight(@font-family, @font-src, @font-weight) {
+        @font-face {
+            .font-family(@font-family);
+            .font-src(@font-src);
+            .font-weight(@font-weight);
+        }
+    }
+
+    .replace-font-by-style(@font-family, @font-src, @font-style) {
+        @font-face {
+            .font-family(@font-family);
+            .font-src(@font-src);
+            .font-style(@font-style);
+        }
+    }
+
+    .replace-font-by-weight-and-style(@font-family, @font-src, @font-weight, @font-style) {
+        @font-face {
+            .font-family(@font-family);
+            .font-src(@font-src);
+            .font-weight(@font-weight);
+            .font-style(@font-style);
+        }
+    }
+
+    .replace-font-by-unicode-range(@font-family, @font-src, @unicode-range) {
+        @font-face {
+            .font-family(@font-family);
+            .font-src(@font-src);
+            .unicode-range(@unicode-range);
+        }
+    }
+
+    .for-each(@list) {
+        .loop(@index: 1) when (@index <=length(@list)) {
+            @item: extract(@list, @index);
+            .callback(@item);
+            .loop(@index + 1);
+        }
+
+        .loop();
+    }
+
+    .replace-to-operator(@font-family) {
+        .replace-font(@font-family, "Operator SSm Book");
+        .replace-font-by-style(@font-family, "Operator SSm Book Italic", italic);
+        .replace-font-by-weight(@font-family, "Operator SSm Bold", bold);
+        .replace-font-by-weight-and-style(@font-family, "Operator SSm Bold Italic", bold, italic);
+        .replace-font-by-weight(@font-family, "Operator SSm Light", 300);
+        .replace-font-by-weight-and-style(@font-family, "Operator SSm Light Italic", 300, italic);
+    }
+
+    .replace-fonts-to-operator(@fonts) {
+        .for-each(@fonts);
+
+        .callback(@font-family) {
+            .replace-to-operator(@font-family);
+        }
+    }
+
+    .replace-to-operator-mono(@font-family) {
+        .replace-font(@font-family, "Operator Mono SSm Book");
+        .replace-font-by-style(@font-family, "Operator Mono SSm Book Italic", italic);
+        .replace-font-by-weight(@font-family, "Operator Mono SSm Bold", bold);
+        .replace-font-by-weight-and-style(@font-family, "Operator Mono SSm Bold Italic", bold, italic);
+        .replace-font-by-weight(@font-family, "Operator Mono SSm Light", 300);
+        .replace-font-by-weight-and-style(@font-family, "Operator Mono SSm Light Italic", 300, italic);
+    }
+
+    .replace-fonts-to-operator-mono(@fonts) {
+        .for-each(@fonts);
+
+        .callback(@font-family) {
+            .replace-to-operator-mono(@font-family);
+        }
+    }
+
+    .replace-to-fzlantinghei(@font-family) {
+        .replace-font-by-weight(@font-family, "FZLanTingHeiPro_GB18030 Regular", normal);
+        .replace-font-by-weight(@font-family, "FZLanTingHeiPro_GB18030_Bold", bold);
+    }
+
+    .replace-fonts-to-fzlantinghei(@fonts) {
+        .for-each(@fonts);
+
+        .callback(@font-family) {
+            .replace-to-fzlantinghei(@font-family);
+        }
+    }
+
+    .replace-cjk-font(@font-family, @font-src) {
+        .replace-font(@font-family, @font-src);
+
+        .replace-font-by-unicode-range(@font-family, @en-default-font, @en-unicode-range);
+        .replace-font-by-unicode-range(@font-family, @font-src, @cn-unicode-range);
+    }
+
+    .replace-sans-serif() {
+        .replace-font(sans-serif, @en-sans-serif-font);
+
+        // .replace-font-by-unicode-range(sans-serif, @en-sans-serif-font, @en-unicode-range);
+        .replace-font-by-unicode-range(sans-serif, @cn-sans-serif-font, @cn-unicode-range);
+    }
+
+    .replace-serif() {
+        .replace-font(serif, @en-serif-font);
+
+        // .replace-font-by-unicode-range(serif, @en-serif-font, @en-unicode-range);
+        .replace-font-by-unicode-range(serif, @cn-serif-font, @cn-unicode-range);
+    }
+
+    .replace-monospace() {
+        .replace-font(monospace, @en-monospace-font);
+
+        // .replace-font-by-unicode-range(monospace, @en-monospace-font, @en-unicode-range);
+        .replace-font-by-unicode-range(monospace, @cn-monospace-font, @cn-unicode-range);
+    }
+
+    .replace-fonts(@source-fonts, @counter) when(@counter > 0) {
+        .replace-fonts(@source-fonts, (@counter - 1));
+        .replace-font(extract(@source-fonts, @counter), @en-default-font);
+    }
+
+    .replace-cjk-fonts(@source-fonts, @counter) when(@counter > 0) {
+        .replace-cjk-fonts(@source-fonts, (@counter - 1));
+        .replace-cjk-font(extract(@source-fonts, @counter), @cn-default-font);
+    }
+
+    .replace-cn-fonts() {
+        .replace-cjk-fonts(@cn-fonts-to-replace, length(@cn-fonts-to-replace));
+    }
+
+    .replace-en-fonts() {
+        .replace-fonts(@en-fonts-to-replace, length(@en-fonts-to-replace));
+    }
+
+    .replace-sans-serif();
+    .replace-serif();
+    .replace-monospace();
+
+    .replace-fonts-to-operator(@en-fonts-to-replace);
+    .replace-fonts-to-operator-mono(@en-monospace-font-to-replace);
+    .replace-fonts-to-fzlantinghei(@cn-fonts-to-replace);
+}

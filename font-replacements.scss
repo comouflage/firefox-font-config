@@ -1,0 +1,210 @@
+$en-sans-serif-font: "Operator SSm Mod Book";
+$en-serif-font: "DejaVu Serif";
+$en-monospace-font: "Operator Mono SSm Book";
+$en-default-font: "Operator SSm Mod Book";
+
+$cn-sans-serif-font: "FZLanTingHeiPro_GB18030_Regular";
+$cn-serif-font: "Noto Serif CJK SC";
+$cn-monospace-font: "Noto Sans Mono CJK SC";
+$cn-default-font: "FZLanTingHeiPro_GB18030_Regular";
+
+$en-unicode-range: U+00-024F;
+$cn-unicode-range: U+4E00-9FFF;
+
+$en-fonts-to-replace: Arial,
+"Bitstream Vera Sans",
+Cantarell,
+Calibri,
+Courier,
+"Courier New",
+"DejaVu Sans",
+freesans,
+Geneva,
+Grande,
+Helvetica,
+"Helvetica Neue",
+"Liberation Sans",
+Lucida,
+"Luxi Sans",
+"Noto Sans",
+"Open Sans",
+"Segoe UI",
+"Segoe UI Light",
+Roboto,
+"Source Sans Pro",
+Tahoma,
+Ubuntu,
+verdana;
+
+$en-serif-fonts-to-replace: Merriweather,
+Georgia,
+"Times New Roman",
+Times;
+
+$en-monospace-fonts-to-replace: "Andale Mono",
+Consolas,
+"DejaVu Sans Mono",
+"Droid Sans Mono",
+"Fira Mono",
+Inconsolata,
+"Liberation Mono",
+Menlo,
+Monaco,
+"SF Mono",
+SFMono-Regular,
+"Source Code Pro";
+
+$cn-fonts-to-replace: "Hiragino Sans GB",
+"Hiragino Sans GB W3",
+"Microsoft YaHei",
+"Microsoft YaHei UI",
+"微软雅黑",
+"PingFang SC",
+"Wenquanyi Micro Hei",
+"WenQuanYi Micro Hei Mono",
+"WenQuanYi Zen Hei",
+"WenQuanYi Zen Hei Sharp";
+
+@mixin font-style($style) {
+    font-style: $style;
+}
+
+@mixin font-weight($weight) {
+    font-weight: $weight;
+}
+
+@function get-src($list) {
+    $src: ();
+
+    @each $font in $list {
+        $src: append($src, local($font), comma);
+    }
+
+    @return $src;
+}
+
+@mixin font-src($local-font) {
+    src: get-src($local-font);
+}
+
+@mixin font-family($font-family) {
+    font-family: $font-family;
+}
+
+@mixin unicode-range($range) {
+    unicode-range: $range;
+}
+
+@mixin replace-font($font-family, $font-src, $font-weight: normal, $font-style: normal) {
+    @font-face {
+        @include font-family($font-family);
+        @include font-src($font-src);
+        @include font-weight($font-weight);
+        @include font-style($font-style);
+    }
+}
+
+@mixin replace-font-by-weight($font-family, $font-src, $font-weight) {
+    @font-face {
+        @include font-family($font-family);
+        @include font-src($font-src);
+        @include font-weight($font-weight);
+    }
+}
+
+@mixin replace-font-by-style($font-family, $font-src, $font-style) {
+    @font-face {
+        @include font-family($font-family);
+        @include font-src($font-src);
+        @include font-style($font-style);
+    }
+}
+
+@mixin replace-font-by-weight-and-style($font-family, $font-src, $font-weight: normal, $font-style: normal) {
+    @font-face {
+        @include font-family($font-family);
+        @include font-src($font-src);
+        @include font-weight($font-weight);
+        @include font-style($font-style);
+    }
+}
+
+@mixin replace-font-by-unicode-range($font-family, $font-src, $unicode-range) {
+    @font-face {
+        @include font-family($font-family);
+        @include font-src($font-src);
+        @include unicode-range($unicode-range);
+    }
+}
+
+@mixin replace-to-operator($font-family) {
+    @include replace-font($font-family, "Operator SSm Book");
+    @include replace-font($font-family, "Operator SSm Book Italic", normal, italic);
+    @include replace-font($font-family, "Operator SSm Bold", bold, normal);
+    @include replace-font($font-family, "Operator SSm Bold Italic", bold, italic);
+    @include replace-font($font-family, "Operator SSm Light", 300, normal);
+    @include replace-font($font-family, "Operator SSm Light Italic", 300, italic);
+}
+
+@mixin replace-fonts-to-operator($fonts) {
+    @each $font in $fonts {
+        @include replace-to-operator($font);
+    }
+}
+
+@mixin replace-to-operator-mono($font-family) {
+    @include replace-font($font-family, "Operator Mono SSm Book");
+    @include replace-font($font-family, "Operator Mono SSm Book Italic", normal, italic);
+    @include replace-font($font-family, "Operator Mono SSm Bold", bold, normal);
+    @include replace-font($font-family, "Operator Mono SSm Bold Italic", bold, italic);
+    @include replace-font($font-family, "Operator Mono SSm Light", 300, normal);
+    @include replace-font($font-family, "Operator Mono SSm Light Italic", 300, italic);
+}
+
+@mixin replace-fonts-to-operator-mono($fonts) {
+    @each $font in $fonts {
+        @include replace-to-operator-mono($font);
+    }
+}
+
+@mixin replace-to-fzlantinghei($font-family) {
+    @include replace-font($font-family, ("FZLanTingHeiPro_GB18030 Regular", "FZLanTingHeiPro"), normal, normal);
+    @include replace-font($font-family, ("FZLanTingHeiPro_GB18030_Bold", "FZLanTingHeiPro_GB18030 Bold"), bold, normal);
+}
+
+@mixin replace-fonts-to-fzlantinghei($fonts) {
+    @each $font in $fonts {
+        @include replace-to-fzlantinghei($font);
+    }
+}
+
+@mixin replace-cjk-font($font-family, $font-src) {
+    @include replace-font($font-family, $font-src);
+
+    @include replace-font-by-unicode-range($font-family, $en-default-font, $en-unicode-range);
+    @include replace-font-by-unicode-range($font-family, $font-src, $cn-unicode-range);
+}
+
+@mixin replace-fonts($fonts) {
+    @each $font in $fonts {
+        @include replace-font($font);
+    }
+}
+
+@mixin replace-cjk-fonts($fonts) {
+    @each $font in $fonts {
+        @include replace-cjk-font($font);
+    }
+}
+
+@mixin replace-cn-fonts {
+    @include replace-cjk-fonts($cn-fonts-to-replace);
+}
+
+@mixin replace-en-fonts {
+    @include replace-fonts($en-fonts-to-replace);
+}
+
+@include replace-fonts-to-operator($en-fonts-to-replace);
+@include replace-fonts-to-operator-mono($en-monospace-fonts-to-replace);
+@include replace-fonts-to-fzlantinghei($cn-fonts-to-replace);
